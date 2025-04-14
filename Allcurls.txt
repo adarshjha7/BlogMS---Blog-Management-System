@@ -1,0 +1,80 @@
+1. User Registration
+
+curl -X POST http://localhost:3000/api/auth/register \
+-H "Content-Type: application/json" \
+-d '{
+  "username": "testuser",
+  "email": "test@example.com",
+  "password": "Test@1234"
+}'
+
+
+
+2. User Login
+(Save the returned token for authenticated requests)
+
+curl -X POST http://localhost:3000/api/auth/login \
+-H "Content-Type: application/json" \
+-d '{
+  "email": "test@example.com",
+  "password": "Test@1234"
+}'
+
+
+3. Create a New Post
+(Replace YOUR_TOKEN with the JWT from login)
+
+
+curl -X POST http://localhost:3000/api/posts \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer YOUR_TOKEN" \
+-d '{
+  "title": "My First Post",
+  "content": "This is the content of my first blog post."
+}'
+
+
+4. Get All Posts (No auth required)
+
+curl http://localhost:3000/api/posts
+
+5. Get Single Post (No auth required)
+(Replace 1 with actual post ID)
+
+curl http://localhost:3000/api/posts/1
+
+6. Update a Post
+(Replace 1 with post ID and YOUR_TOKEN)
+
+curl -X PUT http://localhost:3000/api/posts/1 \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer YOUR_TOKEN" \
+-d '{
+  "title": "Updated Title",
+  "content": "This content has been updated."
+}'
+
+
+7. Delete a Post
+(Replace 1 with post ID and YOUR_TOKEN)
+
+curl -X DELETE http://localhost:3000/api/posts/1 \
+-H "Authorization: Bearer YOUR_TOKEN"
+
+
+8. Create a Comment:
+curl -X POST http://localhost:3000/api/comments \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "content": "This is a great post!",
+    "postId": 1
+  }'
+
+
+9. Get Comments for a Post:
+curl http://localhost:3000/api/comments/post/1
+
+10. Delete a Comment:
+curl -X DELETE http://localhost:3000/api/comments/1 \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
