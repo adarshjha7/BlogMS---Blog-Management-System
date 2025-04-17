@@ -1,8 +1,5 @@
 const { Post } = require('../models');
 const ApiError = require('../utils/ApiError');
-
-// No need to `require` upload middleware here — that goes in routes
-
 const getAllPosts = async (req, res, next) => {
   try {
     const posts = await Post.findAll();

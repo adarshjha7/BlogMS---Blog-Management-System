@@ -7,12 +7,10 @@ const sequelize = new Sequelize({
   logging: console.log
 });
 
-// ✅ Pass DataTypes
 const User = require('./user.model')(sequelize, DataTypes);
 const Post = require('./post.model')(sequelize, DataTypes);
 const Comment = require('./comment.model')(sequelize, DataTypes);
 
-// ✅ Now you can define associations
 User.hasMany(Post, { foreignKey: 'authorId' });
 Post.belongsTo(User, { foreignKey: 'authorId', as: 'author' });
 
